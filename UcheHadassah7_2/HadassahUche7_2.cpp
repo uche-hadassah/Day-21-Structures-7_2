@@ -17,8 +17,8 @@ struct Date
 };
 struct BookData
 {
-	char author[50];
 	char title[50];
+	char author[50];
 	char publisher[100];
 	Date publication;
 	char ISBN[20];//Make this unique for every book
@@ -30,8 +30,8 @@ void displayBookDetail(const BookData&);//I dont get why this is passed as a con
 int CreateISBN();
 int main()
 {
-	BookData Book[100];//This is probably wrong. I'll figure it out later
-
+	BookData Book = {"Forced Love, Forged Hearts","Uche Hadassah","Emyrixx",30,5,2023,"EM0001",25.00};//This is probably wrong. I'll figure it out later
+	displayBookDetail(Book);
 	return 0;
 }
 void enterBookDetail(BookData& Book)
@@ -40,7 +40,10 @@ void enterBookDetail(BookData& Book)
 }
 void displayBookDetail(const BookData& Book)
 {
-
+	cout << "Book Details:" << Book.title << " by " << Book.author << endl;
+	cout << "Published by " << Book.publisher << " on " << Book.publication.day << "/" << Book.publication.month << "/" << Book.publication.year << endl;
+	cout << "ISBN:" << Book.ISBN << endl;
+	cout << "Price:" << Book.price << endl;
 }
 int CreateISBN()
 {
