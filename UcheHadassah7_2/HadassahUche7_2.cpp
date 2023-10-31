@@ -79,45 +79,87 @@ void enterBookDetail(BookData& Book)
 	cout << "Enter Publisher:";
 	cin.getline(Book.publisher, 50);
 	cout << "Enter date of publication.";
+	cout << "\nYear:";
+	cin >> Book.publication.year;
 	//Have to verify the user input. NEVER TRUST THE USER
-	do
+	while (Book.publication.year < 0 || Book.publication.year > 2023)
 	{
-		cout << "\nYear:";
-		cin >> Book.publication.year;
-		if (Book.publication.year % 4 != 0)
+		if (Book.publication.year > 0 && Book.publication.year <= 2023)//Verify that the date is within bounds
 		{
-			do
-			{
-				cout << "\nMonth:";
-				cin >> Book.publication.month;
-				if (Book.publication.month == 2)
-				{
-					do
-					{
-						cout << "\nDay:";
-						cin >> Book.publication.day;
-					} while (Book.publication.day < 0 && Book.publication.day > 28);
-				}
-				else if (Book.publication.month == 4 || Book.publication.month == 6 || Book.publication.month == 9 || Book.publication.month == 11)
-				{
-					do
-					{
-						cout << "\nDay:";
-						cin >> Book.publication.day;
-					} while (Book.publication.day < 0 && Book.publication.day > 30);
-				}
-				else
-				{
-					do
-					{
-						cout << "\nDay:";
-						cin >> Book.publication.day;
-					} while (Book.publication.day < 0 && Book.publication.day > 31);
-				}
-			} while (Book.publication.month < 0 && Book.publication.month > 12);//Verify that the month is within bounds
-		}
 
-	} while (Book.publication.year < 1 && Book.publication.year > 2023);//Verify that the date is within bounds
+			if (Book.publication.year % 4 != 0)
+			{
+				do
+				{
+					cout << "Month:";
+					cin >> Book.publication.month;
+					if (Book.publication.month == 2)
+					{
+						do
+						{
+							cout << "Day:";
+							cin >> Book.publication.day;
+						} while (Book.publication.day > 0 && Book.publication.day <= 28);
+					}
+					else if (Book.publication.month == 4 || Book.publication.month == 6 || Book.publication.month == 9 || Book.publication.month == 11)
+					{
+						do
+						{
+							cout << "Day:";
+							cin >> Book.publication.day;
+						} while (Book.publication.day > 0 && Book.publication.day <= 30);
+					}
+					else
+					{
+						do
+						{
+							cout << "Day:";
+							cin >> Book.publication.day;
+						} while (Book.publication.day > 0 && Book.publication.day <= 31);
+					}
+				} while (Book.publication.month > 0 && Book.publication.month <= 12);//Verify that the month is within bounds
+			}
+			else if (Book.publication.year % 4 == 0)
+			{
+				do
+				{
+					cout << "Month:";
+					cin >> Book.publication.month;
+					if (Book.publication.month == 2)
+					{
+						do
+						{
+							cout << "Day:";
+							cin >> Book.publication.day;
+						} while (Book.publication.day > 0 && Book.publication.day <= 29);
+					}
+					else if (Book.publication.month == 4 || Book.publication.month == 6 || Book.publication.month == 9 || Book.publication.month == 11)
+					{
+						do
+						{
+							cout << "Day:";
+							cin >> Book.publication.day;
+						} while (Book.publication.day > 0 && Book.publication.day <= 30);
+					}
+					else
+					{
+						do
+						{
+							cout << "Day:";
+							cin >> Book.publication.day;
+						} while (Book.publication.day > 0 && Book.publication.day <= 31);
+					}
+				} while (Book.publication.month > 0 && Book.publication.month <= 12);//Verify that the month is within bounds
+			}
+
+		}
+		else
+		{
+			cout << "invalid year!";
+		}
+	}
+
+	
 	// Get the price from the user
 	do
 	{
