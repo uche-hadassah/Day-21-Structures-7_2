@@ -15,17 +15,37 @@ struct Date
 	int month;
 	int year;
 };
-struct Book 
+struct BookData
 {
 	char author[50];
 	char title[50];
 	char publisher[100];
 	Date publication;
-	char ISBN[20];
+	char ISBN[20];//Make this unique for every book
 	double price;
 };
+//Function Prototypes
+void enterBookDetail(BookData&);
+void displayBookDetail(const BookData&);//I dont get why this is passed as a constant
+int CreateISBN();
 int main()
 {
+	BookData Book[100];//This is probably wrong. I'll figure it out later
 
 	return 0;
+}
+void enterBookDetail(BookData& Book)
+{
+	
+}
+void displayBookDetail(const BookData& Book)
+{
+
+}
+int CreateISBN()
+{
+	static int count = 0;/*A static variable does not reset when the function is re - called.
+	ideal for generation unique variables
+	*/
+	return count++;
 }
