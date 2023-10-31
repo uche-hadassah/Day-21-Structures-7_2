@@ -34,7 +34,6 @@ int main()
 	int bookCount = 0;
 	int Option;
 	do
-
 	{
 		cout << "Menu" << endl;
 		cout << "1) Enter new book" << endl;
@@ -66,7 +65,7 @@ int main()
 				displayBookDetail(Book[i]);
 			}
 		}
-	} while (Option < 1);
+	} while (Option > 0);
 	
 	return 0;
 }
@@ -82,84 +81,51 @@ void enterBookDetail(BookData& Book)
 	cout << "\nYear:";
 	cin >> Book.publication.year;
 	//Have to verify the user input. NEVER TRUST THE USER
-	while (Book.publication.year < 0 || Book.publication.year > 2023)
+	while (Book.publication.year < 0 || Book.publication.year > 2023)//Verify that the year is within bounds
 	{
-		if (Book.publication.year > 0 && Book.publication.year <= 2023)//Verify that the date is within bounds
-		{
-
-			if (Book.publication.year % 4 != 0)
-			{
-				do
-				{
-					cout << "Month:";
-					cin >> Book.publication.month;
-					if (Book.publication.month == 2)
-					{
-						do
-						{
-							cout << "Day:";
-							cin >> Book.publication.day;
-						} while (Book.publication.day > 0 && Book.publication.day <= 28);
-					}
-					else if (Book.publication.month == 4 || Book.publication.month == 6 || Book.publication.month == 9 || Book.publication.month == 11)
-					{
-						do
-						{
-							cout << "Day:";
-							cin >> Book.publication.day;
-						} while (Book.publication.day > 0 && Book.publication.day <= 30);
-					}
-					else
-					{
-						do
-						{
-							cout << "Day:";
-							cin >> Book.publication.day;
-						} while (Book.publication.day > 0 && Book.publication.day <= 31);
-					}
-				} while (Book.publication.month > 0 && Book.publication.month <= 12);//Verify that the month is within bounds
-			}
-			else if (Book.publication.year % 4 == 0)
-			{
-				do
-				{
-					cout << "Month:";
-					cin >> Book.publication.month;
-					if (Book.publication.month == 2)
-					{
-						do
-						{
-							cout << "Day:";
-							cin >> Book.publication.day;
-						} while (Book.publication.day > 0 && Book.publication.day <= 29);
-					}
-					else if (Book.publication.month == 4 || Book.publication.month == 6 || Book.publication.month == 9 || Book.publication.month == 11)
-					{
-						do
-						{
-							cout << "Day:";
-							cin >> Book.publication.day;
-						} while (Book.publication.day > 0 && Book.publication.day <= 30);
-					}
-					else
-					{
-						do
-						{
-							cout << "Day:";
-							cin >> Book.publication.day;
-						} while (Book.publication.day > 0 && Book.publication.day <= 31);
-					}
-				} while (Book.publication.month > 0 && Book.publication.month <= 12);//Verify that the month is within bounds
-			}
-
-		}
-		else
-		{
-			cout << "invalid year!";
-		}
+		cout << "invalid Year!";
+		cout << "\nYear:";
+		cin >> Book.publication.year;
 	}
 
+    do
+	{
+			cout << "Month:";
+			cin >> Book.publication.month;	
+	} while (Book.publication.month <= 0 || Book.publication.month > 12);//Verify that the month is within bounds
 	
+
+	if (Book.publication.year % 4 == 0 && Book.publication.month == 2)
+	{
+		do
+		{
+			cout << "Day:";
+			cin >> Book.publication.day;
+		} while (Book.publication.day <= 0 || Book.publication.day > 29);
+	}
+	else if (Book.publication.month == 2) {
+		do
+		{
+			cout << "Day:";
+			cin >> Book.publication.day;
+		} while (Book.publication.day <= 0 || Book.publication.day > 28);
+	}
+	else if (Book.publication.month == 4 || Book.publication.month == 6 || Book.publication.month == 9 || Book.publication.month == 11)
+	{
+		do
+		{
+			cout << "Day:";
+			cin >> Book.publication.day;
+		} while (Book.publication.day <= 0 || Book.publication.day > 30);
+	}
+	else
+	{
+		do
+		{
+			cout << "Day:";
+			cin >> Book.publication.day;
+		} while (Book.publication.day <= 0 || Book.publication.day > 31);
+	}
 	// Get the price from the user
 	do
 	{
@@ -170,7 +136,7 @@ void enterBookDetail(BookData& Book)
 int CreateISBN()
 {
 	static int count = 001;/*A static variable does not reset when the function is re - called.
-	ideal for generation unique variables
+	ideal for generating unique variables
 	*/
 	return count++;
 }
