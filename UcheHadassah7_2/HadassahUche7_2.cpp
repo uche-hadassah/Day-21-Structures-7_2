@@ -18,7 +18,7 @@ struct Book
 };
 int main()
 {
-	Book bookDetails[100];
+	Book bookDetails[MAX];
 	int i = 0;
 	int option;
 	do
@@ -39,13 +39,14 @@ int main()
 		{
 			cout << "Enter the details of the book.";
 			cout << "\nTitle:";
-			cin.getline(bookDetails[i].title, 100);
-			cout << "\nAuthor:";
-			cin.getline(bookDetails[i].author, 100);
+			cin.getline(bookDetails[i].title, MAX);
+			cout << "Author:";
+			cin.getline(bookDetails[i].author, MAX);
 			cout << "\nPublisher:";
-			cin.getline(bookDetails[i].publisher, 100);
+			cin.getline(bookDetails[i].publisher, MAX);
 			cout << "\nYear of publication:";
 			cin >> bookDetails[i].yearOfPublication;
+			bookDetails[i].isbn = i;
 			cout << "\nPrice:";
 			cin >> bookDetails[i].price;
 			i++;
@@ -53,18 +54,24 @@ int main()
 		else if (option == 2)
 		{
 			int j = 0;
-			bookDetails[j].isbn = 0;
-			for(;j<i;j++,bookDetails[j].isbn++)
+			do
 			{
-
-				cout << "\nTitle:" << bookDetails[j].title;
-				cout << "\nAuthor:" << bookDetails[j].author;
-				cout << "\nPublisher:" << bookDetails[j].publisher;
-				cout << "\nYear of publication:" << bookDetails[j].yearOfPublication;
-				cout << "\nISBN:EMYR" << bookDetails[j].isbn;
-				cout << "\nPrice:" << bookDetails[j].price;
 				
-			}
+				for(;j < i;j++)
+				{
+
+						cout << "\nTitle:" << bookDetails[j].title;
+						cout << "\nAuthor:" << bookDetails[j].author;
+						cout << "\nPublisher:" << bookDetails[j].publisher;
+						cout << "\nYear of publication:" << bookDetails[j].yearOfPublication;
+						cout << "\nISBN:EMYR00" << bookDetails[j].isbn;
+						cout << "\nPrice:" << bookDetails[j].price;
+				}
+				if (i == 0)
+				{
+						cout << "No book has been entered.";
+				}
+			} while (j < i);
 			cout << endl;
 		}
 		else
