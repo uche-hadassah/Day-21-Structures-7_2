@@ -1,8 +1,5 @@
-/*a) Define a single structure data type called Book suitable for a storing details for 
-books on sale. The details should include: author, title, publisher, year of publication, 
-ISBN and price. 
-b) Write a program that creates a Book structure variable and accepts the data of a 
-book from the user and then displays the information entered.*/
+/*Name:Uche Hadassah
+This program receives and stores the details of books on sale using structures*/
 #include<iostream>
 #include<cstring>
 using namespace std;
@@ -23,60 +20,70 @@ int main()
 	int option;
 	do
 	{
-		cout << "MENU";
+		cout << "\nMENU";
 		cout << "\n1) Enter new book";
 		cout << "\n2) Display all books";
 		cout << "\n3) Exit";
-		cout << "\n Enter an option:";
+		cout << "\nEnter an option:";
 		cin >> option;
-		while(option < 1 || option > 3)
+		while(option < 1 || option > 3)//Incase of invalid options
 		{
 			cout << "Invalid. Please enter an option:";
 			cin >> option;
 		}
 		cin.ignore();
 		if(option == 1)
-		{
+		{// Receives the details of the book from the user
 			cout << "Enter the details of the book.";
 			cout << "\nTitle:";
 			cin.getline(bookDetails[i].title, MAX);
 			cout << "Author:";
 			cin.getline(bookDetails[i].author, MAX);
-			cout << "\nPublisher:";
+			cout << "Publisher:";
 			cin.getline(bookDetails[i].publisher, MAX);
-			cout << "\nYear of publication:";
-			cin >> bookDetails[i].yearOfPublication;
+			cout << "Year of publication:";
+			do
+			{//Ensures the year is valid
+				cin >> bookDetails[i].yearOfPublication;
+				while (bookDetails[i].yearOfPublication < 1 || bookDetails[i].yearOfPublication > 2023)
+				{
+					cout << "Invalid year. Please enter the year of publication:";
+					cin >> bookDetails[i].yearOfPublication;
+				}
+			} while (bookDetails[i].yearOfPublication < 1 || bookDetails[i].yearOfPublication > 2023);
 			bookDetails[i].isbn = i;
-			cout << "\nPrice:";
-			cin >> bookDetails[i].price;
+			cout << "Price:";
+			do
+			{//Ensures the price is valid
+				cin >> bookDetails[i].price;
+				while (bookDetails[i].price <= 0.0 )
+				{
+					cout << "Invalid price. Please enter the price of the book:";
+					cin >> bookDetails[i].price;
+				}
+			} while (bookDetails[i].price <= 0.0);
 			i++;
 		}
 		else if (option == 2)
-		{
+		{//Prints ot the details of all books
 			int j = 0;
 			do
 			{
-				
-				for(;j < i;j++)
+				for(;j < i;j++)//Prints out the details of every book
 				{
-
-						cout << "\nTitle:" << bookDetails[j].title;
-						cout << "\nAuthor:" << bookDetails[j].author;
-						cout << "\nPublisher:" << bookDetails[j].publisher;
-						cout << "\nYear of publication:" << bookDetails[j].yearOfPublication;
-						cout << "\nISBN:EMYR00" << bookDetails[j].isbn;
-						cout << "\nPrice:" << bookDetails[j].price;
+					cout << "\n" << j + 1 << ") " << bookDetails[j].title << " written by " << bookDetails[j].author
+						<< " and published by " << bookDetails[j].publisher << " in the year " << bookDetails[j].yearOfPublication
+						<< "\nISBN:BOOK00" << bookDetails[j].isbn << "\nPrice:$" << bookDetails[j].price;
 				}
-				if (i == 0)
+				if (i == 0)//If no book was entered
 				{
 						cout << "No book has been entered.";
 				}
 			} while (j < i);
-			cout << endl;
 		}
 		else
 		{
-			cout << "Thank you for your time^^";
+			cout << "\nThank you for your time^^";
 		}
 		
 	} while (option != 3 && i < 100);
